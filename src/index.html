@@ -11,12 +11,16 @@
     <main>
       <div class="container">
         <div class="search-wrapper">
-          <input
-            class="search-input"
-            type="text"
-            placeholder="Search images.."
-          />
-          <button class="search-btn">Search</button>
+          <form class="search-form js-search-form">
+            <input
+              class="search-input js-search-input"
+              type="text"
+              placeholder="Search images.."
+              name="user_query"
+              required
+            />
+            <button class="search-btn">Search</button>
+          </form>
         </div>
 
         <ul class="gallery js-gallery"></ul>
