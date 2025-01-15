@@ -4,14 +4,9 @@ const searchFormEl = document.querySelector('.js-search-form');
 const galleryEl = document.querySelector('.js-gallery');
 
 const createGalleryCardTemplate = imgInfo => {
-  /*
-    <li class="gallery-card">
-      <img class="gallery-img" src="" alt="" />
-    </li>
-  */
   return `
     <li class="gallery-card">
-      <img class="gallery-img" src="${imgInfo.urls.regular}" alt="${imgInfo.alt_description}" />
+      <img class="gallery-img" src="${imgInfo.webformatURL}" alt="${imgInfo.tags}" />
     </li>
   `;
 };
@@ -30,7 +25,7 @@ const onSearchFormSubmit = event => {
   console.log(searchedQuery);
 
   fetch(
-    `https://api.unsplash.com/search/photos?query=${searchedQuery}&client_id=N2hFKxqELoV2Hd6dcIRJn1oRrjfp310WTtPLEXfMXjg&per_page=12&orientation=landscape`
+    `https://pixabay.com/api/?key=48208866-6baf83551ffafce9b15eedbf6&q=${searchedQuery}&image_type=photo&orientation=horizontal&safesearch=true`
   )
     .then(response => {
       if (!response.ok) {
@@ -40,8 +35,12 @@ const onSearchFormSubmit = event => {
       return response.json();
     })
     .then(data => {
-      if (data.total === 0) {
-        alert('За таким ключовим словом зображень не знайдено!');
+      console.log(data);
+
+      if (data.hits.length === 0) {
+        alert(
+          'Sorry, there are no images matching your search query. Please try again!'
+        );
 
         galleryEl.innerHTML = '';
 
@@ -50,7 +49,7 @@ const onSearchFormSubmit = event => {
         return;
       }
 
-      const galleryTemplate = data.results
+      const galleryTemplate = data.hits
         .map(el => createGalleryCardTemplate(el))
         .join('');
 
