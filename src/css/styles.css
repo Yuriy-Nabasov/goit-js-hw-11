@@ -3,7 +3,12 @@
   | include css partials with
   | default @import url()
   |============================
-*/
+  */
+
+/* Підключаємо стилі бібліотек */
+@import 'izitoast/dist/css/iziToast.min.css';
+@import 'simplelightbox/dist/simple-lightbox.min.css';
+
 /* Common styles */
 @import url('./reset.css');
 @import url('./base.css');
@@ -62,11 +67,68 @@
 
 .gallery-card {
   /* width: calc((100% - 48px) / 3); */
+  width: 360px; /* Ширина картки */
+  border: 1px solid #ddd; /* Рамка для візуалізації */
+  border-radius: 8px; /* Закруглені кути */
+
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-link {
+  display: flex;
+  flex-direction: column; /* Вертикальне розташування елементів */
+  width: 100%;
+  position: relative; /* Відносне позиціонування для коректного вирівнювання */
 }
 
 .gallery-img {
-  width: 100%;
-  height: 200px;
-  width: 360px;
-  object-fit: cover;
+  width: 100%; /* Зображення займає всю ширину картки */
+  object-fit: cover; /* Обрізаємо зображення, зберігаючи пропорції */
+  height: 152px;
+}
+
+.gallery-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 16px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.info-item {
+  text-align: center;
+  font-size: 12px;
+  color: #333;
+}
+
+.info-item p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.info-item span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #666;
+}
+
+.loader {
+  border: 8px solid #f3f3f3; /* Світло-сірий колір */
+  border-top: 8px solid #3498db; /* Синій колір */
+  border-radius: 50%; /* Коло */
+  width: 50px; /* Ширина */
+  height: 50px; /* Висота */
+  animation: spin 1s linear infinite; /* Анімація обертання */
+  margin: 20px auto; /* Центрування */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
